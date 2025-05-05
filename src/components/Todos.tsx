@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Todo } from "../models/Todo";
 import { AddTodo } from "./AddTodo";
+import { ShowTodo } from "./ShowTodo";
 
 export const Todos = () => {
   const [todos, setTodos] = useState<Todo[]>([
@@ -13,11 +14,28 @@ export const Todos = () => {
     setTodos([...todos, newTodo]);
   };
 
-  console.log(JSON.stringify(todos));
+  const deleteTodo = (id: number) => {
+    
+  };
+
+  const updateIsDone = (id: number) => {
+    setTodos(todos.map((t) => {
+        if (t.id === id) {
+            return {...t, isDone: t.isDone ? false : true}
+        }
+
+        return t;
+    }));
+  };
 
   return (
     <>
       <AddTodo addTodo={addTodo} />
+      <section>
+        {todos.map((t) => (
+            <ShowTodo key={t.id} todo={t} updateIsDone={updateIsDone}/>
+        ))}
+      </section>
     </>
   );
 };
