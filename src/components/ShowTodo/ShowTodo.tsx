@@ -1,4 +1,5 @@
-import { Todo } from "../models/Todo";
+import { Todo } from "../../models/Todo";
+import "./ShowTodo.css";
 
 type ShowTodoProp = {
   todo: Todo;

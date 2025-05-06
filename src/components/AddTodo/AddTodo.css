@@ -1,0 +1,65 @@
+.addTodo {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+  }
+
+  .input-and-btn-container {
+    display: flex;
+    margin-bottom: 0.5rem;
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+
+      input {
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: rgb(77, 38, 86);
+
+        &:focus {
+          outline: none;
+          border-color: blue;
+          box-shadow: 2px 2px 5px rgba(83, 50, 104, 0.7);
+        }
+
+        &::placeholder {
+          color: rgb(155, 111, 169);
+        }
+      }
+    }
+  }
+
+  .checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    label {
+      margin: 0 5px 0 0;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      position: relative;
+      accent-color: #a200ff;
+      cursor: pointer;
+
+      &:hover {
+        accent-color: #40afff;
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Todo } from "../models/Todo";
-import { AddTodo } from "./AddTodo";
-import { ShowTodo } from "./ShowTodo";
+import { Todo } from "../../models/Todo";
+import { AddTodo } from "../AddTodo/AddTodo";
+import { ShowTodo } from "../ShowTodo/ShowTodo";
+import "./Todos.css";
 
 export const Todos = () => {
   const [todos, setTodos] = useState<Todo[]>([
@@ -53,7 +54,8 @@ export const Todos = () => {
   };
 
   return (
-    <>
+    <div className="card">
+      <h2>Todos</h2>
       <AddTodo addTodo={addTodo} sortTodo={sortTodos} />
       <section>
         {todos.map((t) => (
@@ -65,6 +67,6 @@ export const Todos = () => {
           />
         ))}
       </section>
-    </>
+    </div>
   );
 };
