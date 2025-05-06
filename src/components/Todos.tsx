@@ -10,30 +10,59 @@ export const Todos = () => {
     new Todo(3, "Repot the herbs", false),
   ]);
 
+  const [unsortedTodos, setUnsortedTodos] = useState<Todo[]>([]);
+
   const addTodo = (newTodo: Todo) => {
-    setTodos([...todos, newTodo]);
+    setTodos([...todos, newTodo].sort((a, b) => Number(a.isDone) - Number(b.isDone)));
   };
 
-  const deleteTodo = (id: number) => {
-    
+  const removeTodo = (id: number) => {
+    setTodos(todos.filter((t) => t.id !== id));
   };
 
   const updateIsDone = (id: number) => {
-    setTodos(todos.map((t) => {
-        if (t.id === id) {
-            return {...t, isDone: t.isDone ? false : true}
-        }
+    setTodos(
+      todos
+        .map((t) => {
+          if (t.id === id) {
+            return { ...t, isDone: t.isDone ? false : true };
+          }
 
-        return t;
-    }));
+          return t;
+        })
+        .sort((a, b) => Number(a.isDone) - Number(b.isDone))
+    );
+  };
+
+  const sortTodos = (sort: boolean) => {
+    if (sort) {
+        setUnsortedTodos(todos);
+
+      setTodos(
+        [...todos].sort((a, b) => {
+          if (a.isDone !== b.isDone) {
+            return a.isDone ? 1 : -1;
+          }
+
+          return a.task.localeCompare(b.task);
+        })
+      );
+    } else {
+        setTodos(unsortedTodos)
+    }
   };
 
   return (
     <>
-      <AddTodo addTodo={addTodo} />
+      <AddTodo addTodo={addTodo} sortTodo={sortTodos} />
       <section>
         {todos.map((t) => (
-            <ShowTodo key={t.id} todo={t} updateIsDone={updateIsDone}/>
+          <ShowTodo
+            key={t.id}
+            todo={t}
+            updateIsDone={updateIsDone}
+            removeTodo={removeTodo}
+          />
         ))}
       </section>
     </>

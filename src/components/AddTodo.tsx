@@ -1,38 +1,54 @@
 import { ChangeEvent, useState } from "react";
-import { defaultValue, Todo } from "../models/Todo";
+import { Todo } from "../models/Todo";
 
 type AddTodoProps = {
     addTodo: (todo: Todo) => void;
+    sortTodo: (sort: boolean) => void;
+}
+
+type TodoForm = {
+  task: string
+  sort: boolean
 }
 
 export const AddTodo = (props: AddTodoProps) => {  
 
-  const [todo, setTodo] = useState<Todo>(defaultValue);
+  const [data, setData] = useState<TodoForm>({task: "", sort: false});
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTodo({...todo, id: Date.now(), task: e.target.value});
+    if (e.target.type === "text") {
+      setData({...data, [e.target.id]: e.target.value});
+    }
+
+    if (e.target.type === "checkbox") {
+      setData({...data, [e.target.id]: e.target.checked});
+      props.sortTodo(e.target.checked);
+    }
   };
 
   return (
     <form onSubmit={(e) => { 
-        e.preventDefault();           
+        e.preventDefault();    
         
-        props.addTodo(todo);
+        const newTodo = new Todo(Date.now(), data.task, false);
+        props.addTodo(newTodo);
 
-        setTodo(defaultValue);
+        setData({task: "", sort: data.sort});
       }}
     >
-      <label htmlFor="todo">Add todo</label>
+      <label htmlFor="task">Add todo</label>
       <input
         type="text"
-        id="todo"
+        id="task"
         onChange={handleChange}
-        value={todo.task}
+        value={data.task}
         minLength={3}
         required
         placeholder="Water all plants"
       />
-      <button className="btn-primary">Add</button>
+      <button className="btn btn-primary">Add</button>
+      <label htmlFor="sort">Sort alphabetically</label>
+      <input type="checkbox" id="sort" checked={data.sort} onChange={handleChange} />
     </form>
   );
 };
