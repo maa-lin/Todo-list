@@ -57,7 +57,7 @@ export const Todos = () => {
     <div className="card">
       <h2>Todos</h2>
       <AddTodo addTodo={addTodo} sortTodo={sortTodos} />
-      <section>
+      <section className="list-container">
         {todos.map((t) => (
           <ShowTodo
             key={t.id}

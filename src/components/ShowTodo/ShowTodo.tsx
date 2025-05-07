@@ -18,11 +18,11 @@ export const ShowTodo = (props: ShowTodoProp) => {
   }
 
   return (
-    <div>
-      <p onClick={handleIsDone} className={props.todo.isDone ? "done" : ""}>
-        {props.todo.task} {props.todo.isDone && <i className="fa-solid fa-check"></i>}
+    <div className="todo">
+      <p onClick={handleIsDone} className={`${props.todo.isDone ? "done" : "not-done"} capitalize`}>
+      {props.todo.isDone && <i className="fa-solid fa-check"></i>} {props.todo.task} 
       </p>
-      <button className="btn btn-delete" onClick={handleDelete}>
+      <button className="btn-delete" onClick={handleDelete}>
         <i className="fa-solid fa-xmark"></i>
       </button>
     </div>
