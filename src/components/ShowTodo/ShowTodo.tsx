@@ -8,7 +8,6 @@ type ShowTodoProp = {
 };
 
 export const ShowTodo = (props: ShowTodoProp) => {
-
   const handleIsDone = () => {
     props.updateIsDone(props.todo.id);
   };

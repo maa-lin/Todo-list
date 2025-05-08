@@ -19,6 +19,7 @@ export const Todos = () => {
   if (isSorted) {
     sortedTodos = [...todos].sort((a, b) => {
       if (a.isDone !== b.isDone) return a.isDone ? 1 : -1;
+      
       return a.task.localeCompare(b.task);
     });
   } else {
