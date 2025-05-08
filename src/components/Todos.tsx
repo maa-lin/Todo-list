@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Todo } from "../../models/Todo";
-import { AddTodo } from "../AddTodo/AddTodo";
-import { ShowTodo } from "../ShowTodo/ShowTodo";
-import "./Todos.css";
+import { Todo } from "../models/Todo";
+import { AddTodo } from "./AddTodo";
+import { ShowTodo } from "./ShowTodo";
 import confetti from "canvas-confetti";
 
 export const Todos = () => {
@@ -62,10 +61,10 @@ export const Todos = () => {
   };
 
   return (
-    <div className="card">
-      <h2>Today's To-Do</h2>
+    <div className="flex flex-col items-center gap-[20px] px-7 py-11 rounded-xl shadow-[5px_5px_15px_rgba(83,50,104,0.7)] bg-white/20 backdrop-blur-md border border-white/30 w-sm">
+      <h2 className="text-white text-center font-medium text-3xl px-5 pb-2 border-b border-white mb-4">Today's To-Do</h2>
       <AddTodo addTodo={addTodo} sortToggle={sortToggle} />
-      <section className="list-container">
+      <section className="w-full">
         {sortedTodos.map((t) => (
           <ShowTodo
             key={t.id}
