@@ -4,7 +4,7 @@ import "./AddTodo.css";
 
 type AddTodoProps = {
   addTodo: (todo: Todo) => void;
-  sortTodo: (sort: boolean) => void;
+  sortToggle: (sort: boolean) => void;
 };
 
 type TodoForm = {
@@ -22,7 +22,7 @@ export const AddTodo = (props: AddTodoProps) => {
 
     if (e.target.type === "checkbox") {
       setData({ ...data, [e.target.id]: e.target.checked });
-      props.sortTodo(e.target.checked);
+      props.sortToggle(e.target.checked);
     }
   };
 

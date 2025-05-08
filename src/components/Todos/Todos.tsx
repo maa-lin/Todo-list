@@ -3,6 +3,7 @@ import { Todo } from "../../models/Todo";
 import { AddTodo } from "../AddTodo/AddTodo";
 import { ShowTodo } from "../ShowTodo/ShowTodo";
 import "./Todos.css";
+import confetti from "canvas-confetti";
 
 export const Todos = () => {
   const [todos, setTodos] = useState<Todo[]>([
@@ -11,7 +12,18 @@ export const Todos = () => {
     new Todo(3, "Repot the herbs", false),
   ]);
 
-  const [unsortedTodos, setUnsortedTodos] = useState<Todo[]>([]);
+  const [isSorted, setIsSorted] = useState(false);
+
+  let sortedTodos;
+
+  if (isSorted) {
+    sortedTodos = [...todos].sort((a, b) => {
+      if (a.isDone !== b.isDone) return a.isDone ? 1 : -1;
+      return a.task.localeCompare(b.task);
+    });
+  } else {
+    sortedTodos = [...todos]; 
+  }
 
   const addTodo = (newTodo: Todo) => {
     setTodos([...todos, newTodo].sort((a, b) => Number(a.isDone) - Number(b.isDone)));
@@ -22,9 +34,7 @@ export const Todos = () => {
   };
 
   const updateIsDone = (id: number) => {
-    setTodos(
-      todos
-        .map((t) => {
+    const updatedTodos = todos.map((t) => {
           if (t.id === id) {
             return { ...t, isDone: t.isDone ? false : true };
           }
@@ -32,33 +42,30 @@ export const Todos = () => {
           return t;
         })
         .sort((a, b) => Number(a.isDone) - Number(b.isDone))
-    );
+
+    const allDone = updatedTodos.length > 0 && updatedTodos.every((t) => t.isDone);
+
+    if (allDone) {
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.8 },
+      });
+    }
+
+    setTodos(updatedTodos);
   };
 
-  const sortTodos = (sort: boolean) => {
-    if (sort) {
-        setUnsortedTodos(todos);
-
-      setTodos(
-        [...todos].sort((a, b) => {
-          if (a.isDone !== b.isDone) {
-            return a.isDone ? 1 : -1;
-          }
-
-          return a.task.localeCompare(b.task);
-        })
-      );
-    } else {
-        setTodos(unsortedTodos)
-    }
+  const sortToggle = (sort: boolean) => {
+      setIsSorted(sort);
   };
 
   return (
     <div className="card">
-      <h2>Todos</h2>
-      <AddTodo addTodo={addTodo} sortTodo={sortTodos} />
+      <h2>Today's To-Do</h2>
+      <AddTodo addTodo={addTodo} sortToggle={sortToggle} />
       <section className="list-container">
-        {todos.map((t) => (
+        {sortedTodos.map((t) => (
           <ShowTodo
             key={t.id}
             todo={t}
