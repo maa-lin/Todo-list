@@ -48,8 +48,10 @@ export const Todos = () => {
           }
 
           return t;
-        })
-        .sort((a, b) => Number(a.isDone) - Number(b.isDone))
+        }).sort((a, b) => Number(a.isDone) - Number(b.isDone))
+
+
+    setTodos(updatedTodos);
 
     const allDone = updatedTodos.length > 0 && updatedTodos.every((t) => t.isDone);
 
@@ -59,10 +61,13 @@ export const Todos = () => {
         spread: 100,
         origin: { y: 0.8 },
       });
+
+      saveListToLocalStorage([]);
+      saveIsSortedToLocalStorage(false);
+    } else {
+      saveListToLocalStorage(updatedTodos);
     }
 
-    setTodos(updatedTodos);
-    saveListToLocalStorage(updatedTodos);
   };
 
   const sortToggle = (sort: boolean) => {
