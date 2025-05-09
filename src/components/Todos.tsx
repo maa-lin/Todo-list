@@ -32,13 +32,20 @@ export const Todos = () => {
 
     setTodos(updatedTodos);
     saveListToLocalStorage(updatedTodos);
+    saveIsSortedToLocalStorage(isSorted);
   };
 
   const removeTodo = (id: number) => {
-    const updatedTodos = todos.filter((t) => t.id !== id)
+    const updatedTodos = todos.filter((t) => t.id !== id);
+    const allDone = updatedTodos.length > 0 && updatedTodos.every((t) => t.isDone);
     
     setTodos(updatedTodos);
-    saveListToLocalStorage(updatedTodos);
+    
+    if (allDone) {
+      saveListToLocalStorage([]);
+    } else {
+      saveListToLocalStorage(updatedTodos);
+    }
   };
 
   const updateIsDone = (id: number) => {
