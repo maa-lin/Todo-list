@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { Todo } from "../models/Todo";
+import { getIsSortedFromLocalStorage } from "../localStorageHelpers";
 
 type AddTodoProps = {
   addTodo: (todo: Todo) => void;
@@ -12,7 +13,7 @@ type TodoForm = {
 };
 
 export const AddTodo = (props: AddTodoProps) => {
-  const [data, setData] = useState<TodoForm>({ task: "", sort: false });
+  const [data, setData] = useState<TodoForm>({ task: "", sort: getIsSortedFromLocalStorage() });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === "text") {

@@ -1,10 +1,10 @@
 import { Todo } from "./models/Todo";
 
-export const saveToLocalStorage = (list: Todo[]) => {
+export const saveListToLocalStorage = (list: Todo[]) => {
   localStorage.setItem("todos", JSON.stringify(list));
 };
 
-export const getFromLocalStorage = () => {
+export const getListFromLocalStorage = () => {
   const foundList = localStorage.getItem("todos");
 
   if (foundList) {
@@ -20,3 +20,17 @@ export const getFromLocalStorage = () => {
     ];
   }
 };
+
+export const saveIsSortedToLocalStorage = (sort: boolean) => {
+  localStorage.setItem("isSorted", JSON.stringify(sort));
+}
+
+export const getIsSortedFromLocalStorage = () => {
+  const foundValue = localStorage.getItem("isSorted");
+
+  if (foundValue) {
+    return JSON.parse(foundValue);
+  } else {
+    return false;
+  }
+}

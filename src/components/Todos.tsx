@@ -3,12 +3,17 @@ import { Todo } from "../models/Todo";
 import { AddTodo } from "./AddTodo";
 import { ShowTodo } from "./ShowTodo";
 import confetti from "canvas-confetti";
-import { getFromLocalStorage, saveToLocalStorage } from "../localStorageHelpers";
+import { 
+  getListFromLocalStorage, 
+  saveListToLocalStorage, 
+  saveIsSortedToLocalStorage, 
+  getIsSortedFromLocalStorage 
+} from "../localStorageHelpers";
 
 export const Todos = () => {
-  const [todos, setTodos] = useState<Todo[]>(getFromLocalStorage());
+  const [todos, setTodos] = useState<Todo[]>(getListFromLocalStorage());
 
-  const [isSorted, setIsSorted] = useState(false);
+  const [isSorted, setIsSorted] = useState(getIsSortedFromLocalStorage());
 
   let sortedTodos;
 
@@ -26,14 +31,14 @@ export const Todos = () => {
     const updatedTodos = [...todos, newTodo].sort((a, b) => Number(a.isDone) - Number(b.isDone));
 
     setTodos(updatedTodos);
-    saveToLocalStorage(updatedTodos);
+    saveListToLocalStorage(updatedTodos);
   };
 
   const removeTodo = (id: number) => {
     const updatedTodos = todos.filter((t) => t.id !== id)
     
     setTodos(updatedTodos);
-    saveToLocalStorage(updatedTodos);
+    saveListToLocalStorage(updatedTodos);
   };
 
   const updateIsDone = (id: number) => {
@@ -57,11 +62,14 @@ export const Todos = () => {
     }
 
     setTodos(updatedTodos);
-    saveToLocalStorage(updatedTodos);
+    saveListToLocalStorage(updatedTodos);
   };
 
   const sortToggle = (sort: boolean) => {
+      const updatedIsSorted = sort;
+
       setIsSorted(sort);
+      saveIsSortedToLocalStorage(updatedIsSorted);
   };
 
   return (
