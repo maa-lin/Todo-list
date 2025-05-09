@@ -43,6 +43,7 @@ export const Todos = () => {
     
     if (allDone) {
       saveListToLocalStorage([]);
+      saveIsSortedToLocalStorage(false);
     } else {
       saveListToLocalStorage(updatedTodos);
     }
