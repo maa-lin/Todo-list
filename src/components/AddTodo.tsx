@@ -54,13 +54,13 @@ export const AddTodo = (props: AddTodoProps) => {
         <button className="rounded-lg h-10 mt-4 border-none px-5 py-2 text-md font-medium cursor-pointer transition-colors duration-200 ml-3 text-white bg-purple-600 shadow-[2px_2px_5px_rgba(83,50,104,0.7)] hover:bg-sky-400 active:bg-sky-300">Add</button>
       </div>
       <div className="flex justify-center cursor-pointer">
-      <label htmlFor="sort" className="mr-1 inline-flex items-center cursor-pointer group">Sort alphabetically</label>
+      <label htmlFor="sort" className="mr-1 inline-flex items-center cursor-pointer uppercase text-xs">Sort alphabetically</label>
       <input
         type="checkbox"
         id="sort"
         checked={data.sort}
         onChange={handleChange}
-        className="relative accent-purple-600 cursor-pointer mt-[1px]"
+        className="relative accent-purple-600 cursor-pointer"
       />
       </div>
     </form>

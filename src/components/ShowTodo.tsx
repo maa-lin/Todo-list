@@ -16,11 +16,11 @@ export const ShowTodo = (props: ShowTodoProp) => {
   }
 
   return (
-    <div className="flex justify-between items-center bg-white/10 mb-1 px-3 py-[5px] rounded-[3px] backdrop-blur-sm">
+    <div className="flex justify-between items-center bg-white/10 mb-1 px-3 py-1 rounded-[3px] backdrop-blur-sm">
       <p onClick={handleIsDone} className={`${props.todo.isDone ? "line-through decoration-white" : "line-through decoration-transparent hover:decoration-white transition-decoration-color duration-400 ease-in"} capitalize cursor-pointer`}>
-      {props.todo.isDone && <i className="fa-solid fa-check text-green-300 mr-[5px]"></i>} {props.todo.task} 
+      {props.todo.isDone && <i className="fa-solid fa-check text-green-300 mr-1"></i>} {props.todo.task} 
       </p>
-      <button className="bg-transparent border-none p-0 text-stone-600 cursor-pointer hover:text-red-500 hover:transition-colors hover:duration-300 ease-in" onClick={handleDelete}>
+      <button className="bg-transparent border-none p-0 text-[rgb(80,62,82)] cursor-pointer hover:text-red-500 hover:transition-colors hover:duration-300 ease-in" onClick={handleDelete}>
         <i className="fa-solid fa-xmark"></i>
       </button>
     </div>
