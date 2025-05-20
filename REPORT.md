@@ -51,7 +51,7 @@ för att köra projektet.
 - C:\Work\AssignmentCorrector\backend\repos\fed24s-the-last-todo-maa-lin\src\models\Todo.ts - no-unused-vars - 'id' is defined but never used.,no-unused-vars - 'task' is defined but never used.,no-unused-vars - 'isDone' is defined but never used.
 
 ## 🏆 **Betyg: VG**
-📌 **Motivering:** Applikationen uppfyller samtliga krav för både G och VG. Den hanterar TODO-listor med lokal lagring, möjliggör tillägg och borttagning av uppgifter, tillåter användaren att visa klara uppgifter samt att vända dem tillbaka till oklara. Det finns också stöd för sortering och anpassning av gränssnittet med Tailwind CSS. Koden är generellt välskriven och lätt att följa.
+📌 **Motivering:** Koden uppfyller alla krav för både G och VG. Studenten har implementerat en fullt fungerande todo-applikation med möjligheten att lägga till, ta bort och markera todo-poster som klara. Appen har även stöd för sortering, lokalenhet hantering av todos med localStorage, och använder Tailwind CSS för styling.
 
 💡 **Förbättringsförslag:**  
-Koden kan förbättras ytterligare genom att bryta ner komponenter i mindre delar vid behov för bättre återanvändbarhet och underhåll. Det är också viktigt att dokumentera koden mer detaljerat med kommentarer för att förbättra läsbarheten och stöd vid framtida utveckling. Vidare rekommenderas att implementera enhetstester för funktionerna, vilket skulle öka lösningens robusthet och säkerställa att funktionalitet bibehålls vid potentiella framtida ändringar.
+Den enda mindre förbättringen är att se över koden för eventuella prestandaförbättringar, såsom att undvika onödig sortering eller onödiga uppdateringar av state. Komponenterna är redan ganska välstrukturerade, men man kan överväga att bryta ut kod ytterligare om applikationen växer i framtiden.
